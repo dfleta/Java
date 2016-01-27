@@ -41,7 +41,7 @@ public class MainTablaAsignacionModular {
 			for(int i = 0; i <= numeroCasos-1; i++){
 				caso = "";
 				// genero un string de 8 dígitos entre 0 y 9 = dni
-				for(int j = 1; j <= 9; j++){
+				for(int j = 1; j < 9; j++){
 					// genero un entero entre 48 y 57 = código ASCII de los números 0 al 9 y caracter :
 					Integer caracterAscii = ThreadLocalRandom.current().nextInt(48, 58); // 58 excluido
 					// convierto el entero a un string de chars y luego lo convierto en un String
@@ -76,10 +76,10 @@ public class MainTablaAsignacionModular {
 				char letraDni 			= dni.charAt(dni.length() - 1);
 				
 				if ( tabla.calcularLetra( parteNumericaDni ) == letraDni ) {
-					System.out.println("PASS");
+					System.out.println( parteNumericaDni + letraDni + " PASS" );
 				}
 				else 
-					System.out.println("FAIL");	
+					System.out.println( parteNumericaDni + letraDni + " FAIL" );	
 				
 			}
 	 }

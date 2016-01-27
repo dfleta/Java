@@ -36,9 +36,9 @@ public class MainTablaAsignacion {
 				char letraDni 			= dni.charAt(dni.length() - 1);
 				
 				if ( tabla.calcularLetra( parteNumericaDni ) == letraDni ) {
-					System.out.println("PASS");
+					System.out.println( parteNumericaDni + letraDni + " PASS" );
 				}
-				else System.out.println("FAIL");
+				else System.out.println( parteNumericaDni + letraDni + " FAIL" );
 			}
 			
 			// test casos FAIL - utilizando ArrayList de Strings
@@ -50,7 +50,7 @@ public class MainTablaAsignacion {
 			
 			for(int i = 1; i <= numeroCasos; i++){
 				caso = "";
-				for(int j = 1; j <= 9; j++){
+				for(int j = 1; j < 9; j++){
 					Integer caracterAscii = ThreadLocalRandom.current().nextInt(48, 58); // 58 excluido
 					caso = caso + String.valueOf( Character.toChars(caracterAscii) );
 				}
@@ -66,9 +66,9 @@ public class MainTablaAsignacion {
 				String parteNumericaDni = dni.substring(0, dni.length() - 1);
 				char letraDni 			= dni.charAt(dni.length() - 1);
 				if ( tabla.calcularLetra( parteNumericaDni ) == letraDni ) {
-					System.out.println("PASS");
+					System.out.println( parteNumericaDni + letraDni + " PASS" );
 				}
-				else System.out.println("FAIL");				
+				else System.out.println( parteNumericaDni + letraDni + " FAIL" );				
 			}
 			// for in range == Python	
 			// import java.util.stream.*;
