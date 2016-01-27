@@ -75,9 +75,8 @@ public class DniCif {
 				return getParteAlfabeticaDni();
 		}
 	
-		/* parte PRIVADA */
 	
-		private Boolean checkLongitud() {
+		public Boolean checkLongitud() {
 			return getDni().length() == 9;
 		}
 		
@@ -99,7 +98,7 @@ public class DniCif {
 			return dni.charAt(dni.length() - 1);
 		}
 		
-		private Boolean checkLetraValida() {
+		public Boolean checkLetraValida() {
 			if ( getNumeroSano() ) {
 				return getParteAlfabeticaDni() == obtenerLetra();
 			}
