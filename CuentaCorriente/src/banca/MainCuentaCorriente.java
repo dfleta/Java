@@ -26,7 +26,7 @@ public class MainCuentaCorriente {
 		 
 		*/
 		
-		DniCif dni = new DniCif("12345678");
+		DniCif dni = new DniCif("78484464T");
 		
 		CuentaCorriente cuenta = new CuentaCorriente();
 		cuenta.setNombre("Facundo");
@@ -41,6 +41,13 @@ public class MainCuentaCorriente {
 		
 		CuentaCorriente otra = new CuentaCorriente("Facundo", "Campazzo", dni,
 				"Bolson cerrado", "999888777", 500);
+		
+		if( otra.getDniCif().checkCIF() ){
+			System.out.println( otra.getDni() + " PASS");
+		}
+		else 
+			System.out.println( otra.getDni() + " FAIL");
+	
 		otra.consultarCuenta();
 		
 		CuentaCorriente nueva = new CuentaCorriente();

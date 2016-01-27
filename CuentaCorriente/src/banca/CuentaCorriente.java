@@ -102,6 +102,10 @@ public class CuentaCorriente {
 		return this.dni.getDni();
 	}
 	
+	DniCif getDniCif(){
+		return this.dni;
+	}
+	
 	void setDireccion(String direccion){
 		this.direccion = direccion;
 	}
