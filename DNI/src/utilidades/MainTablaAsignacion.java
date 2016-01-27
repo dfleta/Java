@@ -12,6 +12,7 @@ public class MainTablaAsignacion {
 
 			TablaAsignacion tabla = new TablaAsignacion();
 			
+			/* test getLetra */
 			System.out.println(tabla.getLetra(0));
 			System.out.println(tabla.getLetra(22));
 			

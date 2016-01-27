@@ -6,7 +6,7 @@ public class DniCif {
 		private Boolean numeroSano = false;
 		private Boolean letraSana 	= false;
 		// Composición (agregación) "Has - a" / "Tiene - un"
-		private TablaAsignacion tabla = null;
+		private TablaAsignacion tabla = new TablaAsignacion();
 
 		/* Constructores */
 		
@@ -40,7 +40,12 @@ public class DniCif {
 			return this.letraSana;
 		}
 		
+		/*
+		 * Lógica 
+		 */
 	
+		/* Interfaz Pública */
+		
 		public Boolean checkCIF(){
 			return checkDni() && checkLetra();
 		}
@@ -52,8 +57,7 @@ public class DniCif {
 		
 		public Boolean checkLetra(){
 			if (getNumeroSano() ) {
-				setLetraSana ( Character.isUpperCase(getParteAlfabeticaDni()) && 
-						stringEsNumero( getParteNumericaDni() ) && checkLetraValida() );
+				setLetraSana ( Character.isUpperCase(getParteAlfabeticaDni()) && checkLetraValida() );
 				return getLetraSana();
 			}
 			else {
@@ -68,7 +72,7 @@ public class DniCif {
 				return this.tabla.calcularLetra( getParteNumericaDni() );
 			}
 			else // EXCEPCION: aun no sabemos implementarlas - este código no es admisible
-				return 'Ñ';
+				return getParteAlfabeticaDni();
 		}
 	
 		/* parte PRIVADA */
@@ -77,6 +81,23 @@ public class DniCif {
 			return getDni().length() == 9;
 		}
 		
+		public Boolean stringEsNumero(String cadena){
+			for( int i=0; i < cadena.length(); i++ ){
+				if ( ! Character.isDigit(cadena.charAt(i)) ){
+					return false;
+				}
+				else;
+			}
+			return true;
+		}		
+			
+		public String getParteNumericaDni() {
+			return (String) dni.substring(0, dni.length() - 1);
+		}
+		
+		public Character getParteAlfabeticaDni() {
+			return dni.charAt(dni.length() - 1);
+		}
 		
 		private Boolean checkLetraValida() {
 			if ( getNumeroSano() ) {
@@ -85,25 +106,5 @@ public class DniCif {
 			else
 				return false;
 		}
-		
-		public Character getParteAlfabeticaDni() {
-			return dni.charAt(dni.length() - 1);
-		}
-		
-		public String getParteNumericaDni() {
-			if ( getNumeroSano() ) {
-				return (String) dni.substring(0, dni.length() - 1);
-			}
-			else // EXCEPCION: aun no sabemos implementarlas - este código no es admisible
-				return "false";
-		}
-		public Boolean stringEsNumero(String cadena){
-			for( int i=0; i<=cadena.length(); i++ ){
-				if ( ! Character.isDigit(cadena.charAt(i)) ){
-					return false;
-				}
-				else;
-			}
-			return true;
-		}
+
 }
