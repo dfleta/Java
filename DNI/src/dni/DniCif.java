@@ -1,10 +1,13 @@
 package dni;
 
+import java.io.IOException;
+
 public class DniCif {
 	
 		private String dni  = null;
 		private Boolean numeroSano = false;
 		private Boolean letraSana 	= false;
+		private Boolean dniCifSano  = false;
 		// Composición (agregación) "Has - a" / "Tiene - un"
 		private TablaAsignacion tabla = new TablaAsignacion();
 
@@ -40,6 +43,13 @@ public class DniCif {
 			return this.letraSana;
 		}
 		
+		public void setDniCifSano(Boolean valor){
+			this.dniCifSano = valor;
+		}
+		
+		public Boolean getDniCifSano(){
+			return this.dniCifSano;
+		}
 		/*
 		 * Lógica 
 		 */
@@ -47,7 +57,8 @@ public class DniCif {
 		/* Interfaz Pública */
 		
 		public Boolean checkCIF(){
-			return checkDni() && checkLetra();
+			setDniCifSano( checkDni() && checkLetra() );
+			return getDniCifSano();
 		}
 		
 		public Boolean checkDni(){
@@ -65,14 +76,14 @@ public class DniCif {
 			}
 		}
 						
-		public Character obtenerLetra(){
+		public Character obtenerLetra() throws IOException{
 			// calcularLetra no puede ejecutarse si antes no se cumplen las condiciones previas en checkDni
 			// y checkletra
 			if ( getNumeroSano() ){
 				return this.tabla.calcularLetra( getParteNumericaDni() );
 			}
 			else // EXCEPCION: aun no sabemos implementarlas - este código no es admisible
-				return getParteAlfabeticaDni();
+				throw new IOException("Parte numérica del DNI no está sana");
 		}
 	
 	
@@ -99,11 +110,13 @@ public class DniCif {
 		}
 		
 		public Boolean checkLetraValida() {
-			if ( getNumeroSano() ) {
+			try {
 				return getParteAlfabeticaDni() == obtenerLetra();
 			}
-			else
+			catch(IOException ioexcepcion){
 				return false;
+			}
+				
 		}
 
 }

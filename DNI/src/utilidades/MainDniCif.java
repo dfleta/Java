@@ -1,5 +1,6 @@
 package utilidades;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import dni.DniCif;
@@ -34,13 +35,22 @@ public class MainDniCif {
 		
 		for(String dni : casosTest){
 			DniCif objetoDniCif = new DniCif(dni);
-			System.out.println(objetoDniCif.getDni());
+			System.out.print(objetoDniCif.getDni());
 			
-			objetoDniCif.checkCIF();
+			if( objetoDniCif.checkCIF() ){
+				System.out.println(" PASS");
+			}
+			else
+				System.out.println(" FAIL");
 			
 			System.out.println("dni --> " + objetoDniCif.getNumeroSano());
 			System.out.println("letra --> " + objetoDniCif.getLetraSana());
-			System.out.println("La letra es --> " + objetoDniCif.obtenerLetra());
+			try{
+				System.out.println("La letra debería ser --> " + objetoDniCif.obtenerLetra());
+			}
+			catch(IOException ioexcepcion){
+				System.out.println("La letra es --> " + objetoDniCif.getParteAlfabeticaDni());
+			}
 		}
 		
 		String[] casosTestPass = { //casos OK
@@ -52,13 +62,22 @@ public class MainDniCif {
 		
 		for(String dni : casosTestPass){
 			DniCif objetoDniCif = new DniCif(dni);
-			System.out.println(objetoDniCif.getDni());
+			System.out.print(objetoDniCif.getDni());
 			
-			objetoDniCif.checkCIF();
+			if( objetoDniCif.checkCIF() ){
+				System.out.println(" PASS");
+			}
+			else
+				System.out.println(" FAIL");
 			
 			System.out.println("dni --> " + objetoDniCif.getNumeroSano());
 			System.out.println("letra --> " + objetoDniCif.getLetraSana());
-			System.out.println("La letra es --> " + objetoDniCif.obtenerLetra());
+			try{
+				System.out.println("La letra debería ser --> " + objetoDniCif.obtenerLetra());
+			}
+			catch(IOException ioexcepcion){
+				System.out.println("La letra es --> " + objetoDniCif.getParteAlfabeticaDni());
+			}
 		}
 		
 
