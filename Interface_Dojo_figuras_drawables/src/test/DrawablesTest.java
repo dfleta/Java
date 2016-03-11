@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import draw.Drawable;
@@ -16,11 +17,12 @@ import figuras.Rectangulo;
 
 public class DrawablesTest {
 	
-
-	@Test
-	public void testDibujarDrawables() {
+	private static ArrayList<Drawable> figuras;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 		
-		ArrayList<Drawable> figuras = new ArrayList<>();
+		figuras = new ArrayList<>();
 		
 		Elipse elipse = new Elipse("elipse", 3, 4);
 		Circulo circulo = new Circulo("círculo", 5);
@@ -31,8 +33,13 @@ public class DrawablesTest {
 		figuras.add(circulo);
 		figuras.add(cuadrado);
 		figuras.add(rectangulo);
-			 
-		// Dibujémoslas
+	}
+	
+	
+	@Test
+	public void testDibujarDrawables() {
+		
+		// Dibujemos las figuras
 		
 		Drawables.dibujarDrawables(figuras);
 		
@@ -44,7 +51,6 @@ public class DrawablesTest {
 		circulito.draw();
 		
 		// circulito.area(); no compila: como circulito es de tipo Drawable, no dispone del método area()
-		
 		
 	}
 
