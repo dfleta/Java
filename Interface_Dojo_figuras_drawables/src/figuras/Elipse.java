@@ -58,6 +58,10 @@ public class Elipse extends FiguraGeometrica implements Drawable {
 		System.out.println("Esto es una: " + this.getNombre());
 	}
 
+	/* A elipse no se le puede aplicar un tema => no implementa la espefificación applyTheme()
+	* de la interfaz Drawable.
+	* Se ejecuta el método default de la interfaz => desde el caller hay que atrapar esa excepción.
+	*/
 
 
 }

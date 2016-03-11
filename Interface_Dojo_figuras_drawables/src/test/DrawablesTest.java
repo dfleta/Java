@@ -53,5 +53,13 @@ public class DrawablesTest {
 		// circulito.area(); no compila: como circulito es de tipo Drawable, no dispone del método area()
 		
 	}
+	
+	@Test
+	public void testAplicarTema(){
+
+		Drawables.aplicarTema(figuras);
+	
+	}
+	
 
 }

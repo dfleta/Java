@@ -48,4 +48,13 @@ public class Cuadrado extends FiguraGeometrica implements Drawable {
 		System.out.println("Esto es un: " + this.getNombre());
 	}
 	
+	// Eliminar en la sobreesceritura un throw Exception de un método default de la interfaz
+	// está permitido porque es imponer restricciones a la definición del método...
+	// ... pero la excepción ha de ser recogida por el caller.
+	
+	@Override
+	public void applyTheme(){
+		System.out.println("Aplicado un tema chulo a: " + this.getNombre());
+	}
+	
 }
