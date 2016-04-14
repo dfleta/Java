@@ -4,22 +4,28 @@
 		xmlns:emt="https://api.mobipalma.mobi/docs/" 
 		elementFormDefault="unqualified">
      
-    <element name="estacion" type="emt:Estacion"></element>
-    
-    
+    <element name="estacion" type="emt:Estacion"></element> 
      
     <complexType name="Estacion">
     	<sequence>
     		<element name="id" type="string"></element>
     		<element name="direccion" type="string"></element>
     		<element name="numeroAnclajes" type="int"></element>
-    		<element name="anclajes">
-    			<complexType>
-    				<sequence>
-    					<element name="conexion" type="string" maxOccurs="unbounded"/>
-      				</sequence>			
-    			</complexType>
+    		<element name="anclajes" type="emt:Anclajes">
     		</element>
     	</sequence>
     </complexType>
+    
+    <complexType name="Anclajes">
+    	<sequence>
+    		<element name="bicicleta" type="emt:Bicicleta" maxOccurs="unbounded"/>
+      	</sequence>			
+    </complexType>
+       
+    <simpleType name="Bicicleta">
+    	<restriction base="string">
+      		<pattern value="[0-9]{3}|null"/>
+   		</restriction>
+ 	</simpleType>
+    
 </schema>

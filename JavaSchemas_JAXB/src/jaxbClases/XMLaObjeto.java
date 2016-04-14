@@ -5,21 +5,16 @@
 
 package jaxbClases;
 
-import jaxbClases.ObjectFactory;
-
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import bicicleta.Bicicleta;
 
 public class XMLaObjeto {
 
@@ -62,7 +57,7 @@ public class XMLaObjeto {
 			// An Unmarshaller instance is created, and estacion.xml is unmarshalled.
 			
 			Unmarshaller u = jc.createUnmarshaller();
-			InputStream in = new FileInputStream("src/estacion.xml");
+			InputStream in = new FileInputStream("src/schemas/bicipalma.xml");
 			JAXBElement<Estacion> objetoEstacion = (JAXBElement<Estacion>)u.unmarshal(in);
 
 			/* JAXBElement<Element> JAXB representation of an Xml Element.
@@ -83,15 +78,6 @@ public class XMLaObjeto {
 			consultarAnclajes(objetoEstacion);
 			
 			
-			// for( String anclaje:objetoEstacion.getValue().getAnclajes().getConexion();   )
-			
-			
-			/* De otro modo
-			 * */
-			// Estacion objetoEstacion = (Estacion)u.unmarshal( new FileInputStream( "src/estacion.xml" ) );
-			// System.out.println("Estacion: " + objetoEstacion.getId());
-			
-			
 			/* MARSHALLER
 			 * https://docs.oracle.com/javase/7/docs/api/javax/xml/bind/Marshaller.html
 			 * https://docs.oracle.com/javase/7/docs/api/javax/xml/bind/JAXBContext.html
@@ -101,14 +87,25 @@ public class XMLaObjeto {
 			 * a content tree that is the result an unmarshal operation.
 			 * */
 			
-			// Marshalling to a java.io.OutputStream:
+			/* OTROS EJEMPLOS DE MARSHALLING */
+			
+			// Marshalling to a java.io.OutputStream == a consola:
+			
 			System.out.println("Objeto en memoria marshalled a XML: ");
+			
 			Marshaller m = jc.createMarshaller(); 			
 			m.marshal( objetoEstacion, System.out );
 			
 			// Marshalling to a File:
-			OutputStream fichero = new FileOutputStream( "src/marshalizado.xml" );
+			
+			File fichero = new File("src/schemas/marshalizado.xml");
+			fichero.createNewFile();
+			// createNewFile() atomically creates a new, empty file named by this abstract pathname 
+			// if and only if a file with this name does not yet exist.
+			
+			m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "https://api.mobipalma.mobi/docs/ bicipalma.xsd");
 			m.marshal( objetoEstacion, fichero );
+			System.out.println("\n Objeto en memoria marshalled a fichero: " + fichero.getPath());
 			
 		} 
 		catch (JAXBException | IOException ex) {
@@ -120,16 +117,21 @@ public class XMLaObjeto {
 	public static void consultarAnclajes(JAXBElement<Estacion> objetoEstacion){
 		// recorre el array anclajes y muestra el id de la bici anclada o si está libre
 		
+		// la clase Bicicleta no es creada por JAXB porque he declarado el tipo del elemento bicicleta
+		// como simpleContent restriction de un string en el Schema.
+		// La clase Anclajes es un List<String> bicicleta
+		
 		int posicion = 0;
 		int numeroAnclaje = 0;
 		
-		for(String anclaje:objetoEstacion.getValue().getAnclajes().getConexion() ){
+		for(String bicicleta:objetoEstacion.getValue().getAnclajes().getBicicleta() ){
 			numeroAnclaje = posicion + 1;
-			if( anclaje != null ){
-				System.out.println("Anclaje " + numeroAnclaje + " " + anclaje);
+			System.out.println(bicicleta);
+			if( bicicleta.matches("[0-9]{3}") ){
+				System.out.println("Anclaje " + numeroAnclaje + " : " + bicicleta);
 			}
 			else
-				System.out.println("Anclaje " + numeroAnclaje + " " + " libre");
+				System.out.println("Anclaje " + numeroAnclaje + " : " + " libre");
 			
 			posicion++;	
 		}

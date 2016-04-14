@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emt:estacion xmlns:emt="https://api.mobipalma.mobi/docs/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://api.mobipalma.mobi/docs/ bicipalma.xsd">
+	<id>id</id>
+	<direccion>direccion</direccion>
+	<numeroAnclajes>5</numeroAnclajes>
+	<anclajes>
+		<bicicleta>250</bicicleta>
+		<bicicleta>null</bicicleta>
+		<bicicleta>270</bicicleta>
+		<bicicleta>null</bicicleta>
+		<bicicleta>290</bicicleta>
+	</anclajes>
+</emt:estacion>

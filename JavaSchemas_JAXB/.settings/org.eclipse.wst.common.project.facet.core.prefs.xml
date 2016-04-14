@@ -11,7 +11,7 @@
     </node>
     <node name="schemas">
       <node name="schema-1">
-        <attribute name="location" value="platform:/resource/JavaSchemas_JAXB/src/estacion.xsd"/>
+        <attribute name="location" value="platform:/resource/JavaSchemas_JAXB/src/schemas/bicipalma.xsd"/>
       </node>
     </node>
   </facet>
