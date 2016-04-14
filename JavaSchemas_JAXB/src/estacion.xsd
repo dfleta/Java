@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="https://api.mobipalma.mobi/docs/"
+		xmlns:emt="https://api.mobipalma.mobi/docs/" 
+		elementFormDefault="unqualified">
+     
+    <element name="estacion" type="emt:Estacion"></element>
+    
+    
+     
+    <complexType name="Estacion">
+    	<sequence>
+    		<element name="id" type="string"></element>
+    		<element name="direccion" type="string"></element>
+    		<element name="numeroAnclajes" type="int"></element>
+    		<element name="anclajes">
+    			<complexType>
+    				<sequence>
+    					<element name="conexion" type="string" maxOccurs="unbounded"/>
+      				</sequence>			
+    			</complexType>
+    		</element>
+    	</sequence>
+    </complexType>
+</schema>
