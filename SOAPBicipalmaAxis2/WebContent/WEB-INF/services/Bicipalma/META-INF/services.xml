@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.7.1  Built on : Feb 20, 2016 (10:01:29 GMT) --><serviceGroup>
+    <service name="Bicipalma">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="mobi.mobipalma.api.docs.BicipalmaMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">mobi.mobipalma.api.docs.BicipalmaSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="estadoEstacion" mep="http://www.w3.org/ns/wsdl/in-out" namespace="https://api.mobipalma.mobi/docs/">
+            <actionMapping>https://api.mobipalma.mobi/docs/estadoEstacion</actionMapping>
+            <outputActionMapping>https://api.mobipalma.mobi/docs/Bicipalma/estadoEstacionResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

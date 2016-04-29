@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions 
+	xmlns:emt="https://api.mobipalma.mobi/docs/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Bicipalma"
+	targetNamespace="https://api.mobipalma.mobi/docs/">
+	<wsdl:types>
+
+		<!-- Schema inline: define los mensajes. ¿Qué tipos de datos se transmiten? -->
+
+		<xsd:schema targetNamespace="https://api.mobipalma.mobi/docs/"
+					elementFormDefault = "qualified"> 
+					<!-- elemento globales y locales qualified por exigencia SOAP  -->
+
+			<xsd:element name="estadoEstacionRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="idEstacion" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="estadoEstacionResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="estacion" type="emt:Estacion"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:complexType name="Estacion">
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:string"></xsd:element>
+					<xsd:element name="direccion" type="xsd:string"></xsd:element>
+					<xsd:element name="numeroAnclajes" type="xsd:int"></xsd:element>
+					<xsd:element name="anclajes" type="emt:Anclajes"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="Anclajes">
+				<xsd:sequence>
+					<xsd:element name="bicicleta" type="emt:Bicicleta"
+						maxOccurs="unbounded" minOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:simpleType name="Bicicleta">
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="[0-9]{3}|null" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+		</xsd:schema>
+	
+	</wsdl:types>
+	
+	<!-- MENSAJES: ¿Qué información se espera?
+		The message elements list the parts that make up a message.
+		• Each part corresponds to an element in the XML Schema located in the types section.  -->
+	
+	<wsdl:message name="estadoEstacionRequest">
+		<wsdl:part element="emt:estadoEstacionRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="estadoEstacionResponse">
+		<wsdl:part element="emt:estadoEstacionResponse" name="parameters" />
+	</wsdl:message>
+	
+	<!-- 	PORT TYPE
+			¿Qué OPERACIONES (funciones) se esperan?  -->
+	
+	<wsdl:portType name="Bicipalma">
+		<wsdl:operation name="estadoEstacion">
+			<wsdl:input message="emt:estadoEstacionRequest" />
+			<wsdl:output message="emt:estadoEstacionResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<!-- BINDING 
+		 Un binding	es la particularización de un portType para un transporte particular.  
+		 ¿Cómo se transmitirán los mensajes por el "cable"? 
+		 ¿Cuáles son los detalles específicos de SOAP? -->
+	
+	<wsdl:binding name="BicipalmaSOAP" type="emt:Bicipalma">
+	
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="estadoEstacion">
+			<soap:operation soapAction="https://api.mobipalma.mobi/docs/estadoEstacion" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+	
+	<!-- Define la colección de puertos que arman un servicio 
+		 y dónde está localizado.   -->
+	
+	<wsdl:service name="Bicipalma">
+		<wsdl:port binding="emt:BicipalmaSOAP" name="BicipalmaSOAP">
+			<soap:address location="http://localhost:8080/BicipalmaSOAP" />
+			<!-- dirección servidor Tomcat + nombre del port  -->
+		</wsdl:port>
+	</wsdl:service>
+	
+</wsdl:definitions>
