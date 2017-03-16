@@ -2,7 +2,7 @@ package utilidades;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import dni.TablaAsignacion;
+import nif.TablaAsignacion;
 
 public class MainTablaAsignacionModular {
 

@@ -4,7 +4,7 @@ import nif.TablaAsignacion;
 
 import expresionesRegulares.RegEx;
 
-public abstract class Nif {
+public class Nif {
 
 	protected String nif  			= null;
 	protected Boolean numeroSano 	= false;
@@ -84,7 +84,7 @@ public abstract class Nif {
 
 	public Boolean checkNIF(){
 		// El DNI es válido si su formato es correcto y si la letra asociada es la adecuada al número
-		setNifSano( checkFormatoNIF() && checkLetraValida() );
+		setNifSano( checkFormatoNIF() /* && checkLetraValida() */ );
 		return getNifSano();
 	}
 	
@@ -93,7 +93,7 @@ public abstract class Nif {
 		return getNumeroSano();
 	}
 	
-	public abstract Boolean checkLetraValida();
+	// public abstract Boolean checkLetraValida();
 	
 	public Character getParteAlfabeticaDni() {
 		return nif.charAt(nif.length() - 1);

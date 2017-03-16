@@ -4,7 +4,7 @@ package utilidades;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import dni.TablaAsignacion;
+import nif.TablaAsignacion;
 
 public class MainTablaAsignacion {
 
