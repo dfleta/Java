@@ -2,21 +2,13 @@ package org.foobarspam.furnaceDIGuice.DIGuice;
 
 import org.foobarspam.furnaceDIGuice.consumer.Regulador;
 import org.foobarspam.furnaceDIGuice.injector.RegulatorModule;
-import org.foobarspam.furnaceDIGuice.interfaces.Heater;
-import org.foobarspam.furnaceDIGuice.interfaces.Thermometer;
-import org.foobarspam.furnaceDIGuice.services.GasHeater;
 import org.foobarspam.furnaceDIGuice.services.Jedi;
-import org.foobarspam.furnaceDIGuice.services.RemoteCommandSensor;
-import org.foobarspam.furnaceDIGuice.types.RoomTemperature;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-/**
- * Hello world!
- *
- */
-public class App {
+
+public class FurnaceApp {
 	
     public static void main( String[] args ) {
     	

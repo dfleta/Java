@@ -3,13 +3,22 @@ package org.foobarspam.furnaceDIGuice.services;
 import org.foobarspam.furnaceDIGuice.interfaces.Heater;
 import org.foobarspam.furnaceDIGuice.types.RoomTemperature;
 
+import com.google.inject.Inject;
+
 public class Jedi implements Heater {
 	
-	public void engage(RoomTemperature temperature){
+	private RoomTemperature temperature = null;
+	
+	@Inject
+	public void setTemperature(RoomTemperature temperature){
+		this.temperature = temperature;		
+	}
+	
+	public void engage(){
 		 temperature.incrementTemperature(this.toucheLightSable());
 	}
-	public void disengage(RoomTemperature temperature){
-		this.forcePersuasion(temperature);
+	public void disengage(){
+		this.forcePersuasion();
 	}
 	
 	private double toucheLightSable(){
@@ -17,7 +26,7 @@ public class Jedi implements Heater {
 		return lightSableTemperature;
 	}
 	
-	private void forcePersuasion(RoomTemperature temperature){
+	private void forcePersuasion(){
 		temperature.incrementTemperature(-1400);
 	}
 	

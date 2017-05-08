@@ -5,11 +5,10 @@ import org.foobarspam.furnaceDIGuice.interfaces.Heater;
 import org.foobarspam.furnaceDIGuice.interfaces.Thermometer;
 import org.foobarspam.furnaceDIGuice.types.RegulatorDisplayCodes;
 import org.foobarspam.furnaceDIGuice.types.RoomTemperature;
+import org.foobarspam.furnaceDIGuice.interfaces.Regulator;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
-import org.foobarspam.furnaceDIGuice.interfaces.Regulator;
 
 public class Regulador implements Regulator {
 	
@@ -21,7 +20,7 @@ public class Regulador implements Regulator {
 	private RegulatorDisplayCodes code = null;
 	
 	@Inject
-	public void Regulador(Thermometer thermometer, @Force Heater heater){
+	public Regulador(Thermometer thermometer, @Force Heater heater){
 		// con la BindingAnnotation @Force selecciono la implementacion Jedi
 		// del servicio, aunque me obliga a crear una interfaz mas
 		this.heater = heater;
@@ -67,12 +66,12 @@ public class Regulador implements Regulator {
 	public void regulate(){
 			while(thermometer.read(temperature) < maxTemp){
 				code = RegulatorDisplayCodes.HEATING;				
-				heater.engage(temperature);
+				heater.engage();
 				message();
 			}
 			while (thermometer.read(temperature) > minTemp){
 				code = RegulatorDisplayCodes.WAITING;
-				heater.disengage(temperature);			
+				heater.disengage();			
 				message();
 			}
 	}

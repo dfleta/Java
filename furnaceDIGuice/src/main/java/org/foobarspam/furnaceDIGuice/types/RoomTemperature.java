@@ -1,5 +1,6 @@
 package org.foobarspam.furnaceDIGuice.types;
 
+
 public class RoomTemperature {
 	
 	private double temperature = 0;
@@ -8,10 +9,8 @@ public class RoomTemperature {
 	public RoomTemperature(double temperature){
 		this.temperature = temperature;
 	}*/
-	// necesito un constructor sin argumentos para realizar inyeccion
-	public RoomTemperature(){
-		this.temperature = temperature;
-	}
+	// necesito un constructor sin argumentos para realizar inyeccion de dependencias
+	public RoomTemperature(){}
 	
 
 	public double getTemperature() {

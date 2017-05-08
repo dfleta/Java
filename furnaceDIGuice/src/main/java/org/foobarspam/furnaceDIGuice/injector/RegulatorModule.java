@@ -9,6 +9,7 @@ import org.foobarspam.furnaceDIGuice.types.RoomTemperature;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
 
 public class RegulatorModule extends AbstractModule {
 
@@ -21,6 +22,7 @@ public class RegulatorModule extends AbstractModule {
 		
 		bind(Thermometer.class).to(RemoteCommandSensor.class);
 		
+	
 		/* 
 		 * dependencia a una clase concreta
 		 * You can bind a type to a specific instance of that type. 
@@ -39,8 +41,13 @@ public class RegulatorModule extends AbstractModule {
 	 * The method must be defined within a module, and it must have an @Provides annotation. 
 	 * The method's return type is the bound type. 
 	 * Whenever the injector needs an instance of that type, it will invoke the method.
+	 * 
+	 * @Singleton si queremos devolver siempre la misma instancia para todo
+	 * el tiempo de vida de la aplicacion.
+	 * Aqui es necesario puesto que Regulador y Heater (su implementacion GasHeater)
+	 * o Jedi necesitan la misma instancia de temperatura.
 	 */
-	@Provides
+	@Provides @Singleton
 	RoomTemperature provideRoomTemperature() {
 		RoomTemperature roomTemperature = new RoomTemperature();
 		// movemos la configuracion del objeto desde el main a este modulo
